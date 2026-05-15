@@ -319,7 +319,7 @@ class BizerOS_Ajax {
 		$message = $this->sanitize_response_message( $message );
 
 		if ( '' === $message ) {
-			$message = __( self::DEFAULT_WEBHOOK_ACK_MESSAGE, 'bizeros' );
+			$message = __( 'Your message was sent to Hermes.', 'bizeros' );
 		}
 
 		return array(
@@ -368,7 +368,7 @@ class BizerOS_Ajax {
 		$message     = $this->sanitize_response_message( $message );
 
 		if ( '' === $message ) {
-			$message = __( self::DEFAULT_WEBHOOK_ACK_MESSAGE, 'bizeros' );
+			$message = __( 'Your message was sent to Hermes.', 'bizeros' );
 		}
 
 		$response = array(

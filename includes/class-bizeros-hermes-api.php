@@ -1399,7 +1399,7 @@ class BizerOS_Hermes_API {
 
 		if ( '' === trim( $body ) ) {
 			return $this->build_success_response(
-				__( self::DEFAULT_ACK_MESSAGE, 'bizeros' ),
+				__( 'Your message was sent to Hermes.', 'bizeros' ),
 				$this->get_public_success_status_code( $status_code ),
 				array(
 					'acknowledged'              => true,
@@ -1416,7 +1416,7 @@ class BizerOS_Hermes_API {
 			$message = $this->sanitize_response_message( $body );
 
 			return $this->build_success_response(
-				'' !== $message ? $message : __( self::DEFAULT_ACK_MESSAGE, 'bizeros' ),
+				'' !== $message ? $message : __( 'Your message was sent to Hermes.', 'bizeros' ),
 				$this->get_public_success_status_code( $status_code ),
 				array(
 					'acknowledged'              => true,
@@ -1447,7 +1447,7 @@ class BizerOS_Hermes_API {
 			$message = $this->extract_response_message( $decoded );
 
 			if ( '' === $message ) {
-				$message = __( self::DEFAULT_ACK_MESSAGE, 'bizeros' );
+				$message = __( 'Your message was sent to Hermes.', 'bizeros' );
 			}
 
 			return $this->build_success_response(
@@ -1466,7 +1466,7 @@ class BizerOS_Hermes_API {
 			$message = $this->sanitize_response_message( (string) $decoded );
 
 			return $this->build_success_response(
-				'' !== $message ? $message : __( self::DEFAULT_ACK_MESSAGE, 'bizeros' ),
+				'' !== $message ? $message : __( 'Your message was sent to Hermes.', 'bizeros' ),
 				$this->get_public_success_status_code( $status_code ),
 				array(
 					'acknowledged'              => true,
@@ -1478,7 +1478,7 @@ class BizerOS_Hermes_API {
 		}
 
 		return $this->build_success_response(
-			__( self::DEFAULT_ACK_MESSAGE, 'bizeros' ),
+			__( 'Your message was sent to Hermes.', 'bizeros' ),
 			$this->get_public_success_status_code( $status_code ),
 			array(
 				'acknowledged'              => true,
@@ -1498,7 +1498,7 @@ class BizerOS_Hermes_API {
 	private function normalize_non_http_response( $response ) {
 		if ( true === $response ) {
 			$this->last_delivery_success = true;
-			return $this->build_success_response( __( self::DEFAULT_ACK_MESSAGE, 'bizeros' ), 200, array( 'acknowledged' => true, 'delivered' => true ) );
+			return $this->build_success_response( __( 'Your message was sent to Hermes.', 'bizeros' ), 200, array( 'acknowledged' => true, 'delivered' => true ) );
 		}
 
 		if ( is_string( $response ) ) {
@@ -1536,7 +1536,7 @@ class BizerOS_Hermes_API {
 			if ( '' !== $message || ! empty( $response['success'] ) ) {
 				$this->last_delivery_success = true;
 				return $this->build_success_response(
-					'' !== $message ? $message : __( self::DEFAULT_ACK_MESSAGE, 'bizeros' ),
+					'' !== $message ? $message : __( 'Your message was sent to Hermes.', 'bizeros' ),
 					$status_code ? $this->get_public_success_status_code( $status_code ) : 200,
 					array(
 						'acknowledged'       => true,
