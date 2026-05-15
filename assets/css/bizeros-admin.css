@@ -1,0 +1,604 @@
+/**
+ * BizerOS admin settings styles.
+ *
+ * Styling scoped to the BizerOS settings page, including the Hermes signed
+ * webhook connection settings, setup guidance, connection test, and diagnostics.
+ */
+
+.bizeros-admin-wrap {
+	--bizeros-admin-primary: #7c3aed;
+	--bizeros-admin-primary-dark: #6426d9;
+	--bizeros-admin-primary-soft: #f3edff;
+	--bizeros-admin-primary-faint: #fbfaff;
+	--bizeros-admin-border: #dcdcde;
+	--bizeros-admin-border-soft: #ece8f5;
+	--bizeros-admin-text: #1d2327;
+	--bizeros-admin-muted: #646970;
+	--bizeros-admin-surface: #ffffff;
+	--bizeros-admin-surface-soft: #fcfbff;
+	--bizeros-admin-success: #16a34a;
+	--bizeros-admin-error: #dc2626;
+	--bizeros-admin-warning: #d97706;
+	--bizeros-admin-radius: 10px;
+
+	max-width: 920px;
+}
+
+.bizeros-admin-wrap h1 {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 18px;
+	color: var(--bizeros-admin-text);
+}
+
+.bizeros-admin-wrap h1::before {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 34px;
+	height: 34px;
+	border-radius: 9px;
+	color: #ffffff;
+	font-size: 17px;
+	font-weight: 700;
+	line-height: 1;
+	background: linear-gradient(135deg, #8b5cf6 0%, var(--bizeros-admin-primary-dark) 100%);
+	content: "B";
+}
+
+.bizeros-admin-wrap form {
+	max-width: 860px;
+	padding: 0 24px 22px;
+	border: 1px solid var(--bizeros-admin-border-soft);
+	border-radius: var(--bizeros-admin-radius);
+	background: var(--bizeros-admin-surface);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.bizeros-admin-wrap h2 {
+	margin: 0 -24px 16px;
+	padding: 18px 24px;
+	border-bottom: 1px solid var(--bizeros-admin-border-soft);
+	border-radius: var(--bizeros-admin-radius) var(--bizeros-admin-radius) 0 0;
+	color: var(--bizeros-admin-text);
+	font-size: 16px;
+	font-weight: 600;
+	background: var(--bizeros-admin-primary-faint);
+}
+
+.bizeros-admin-wrap form > p,
+.bizeros-admin-wrap .form-table + p {
+	color: var(--bizeros-admin-muted);
+}
+
+.bizeros-admin-wrap .form-table {
+	margin-top: 0;
+}
+
+.bizeros-admin-wrap .form-table th {
+	width: 190px;
+	padding-top: 22px;
+	color: var(--bizeros-admin-text);
+	font-weight: 600;
+}
+
+.bizeros-admin-wrap .form-table td {
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+
+.bizeros-admin-wrap input[type="text"],
+.bizeros-admin-wrap input[type="url"],
+.bizeros-admin-wrap input[type="password"],
+.bizeros-admin-wrap input[readonly],
+.bizeros-admin-wrap select {
+	width: 100%;
+	max-width: 460px;
+	min-height: 36px;
+	border-color: var(--bizeros-admin-border);
+	border-radius: 6px;
+	box-shadow: none;
+}
+
+.bizeros-admin-wrap select {
+	width: auto;
+	min-width: min(100%, 460px);
+	padding-right: 30px;
+	background-color: #ffffff;
+}
+
+.bizeros-admin-wrap input[type="text"]:focus,
+.bizeros-admin-wrap input[type="url"]:focus,
+.bizeros-admin-wrap input[type="password"]:focus,
+.bizeros-admin-wrap select:focus {
+	border-color: var(--bizeros-admin-primary);
+	box-shadow: 0 0 0 1px var(--bizeros-admin-primary);
+	outline: 2px solid transparent;
+}
+
+.bizeros-admin-wrap input[readonly] {
+	color: var(--bizeros-admin-muted);
+	background: #f6f7f7;
+	cursor: text;
+}
+
+.bizeros-admin-wrap input.code,
+.bizeros-admin-wrap input[type="url"].code {
+	font-family: Consolas, Monaco, monospace;
+}
+
+.bizeros-admin-wrap .description {
+	max-width: 680px;
+	margin-top: 7px;
+	color: var(--bizeros-admin-muted);
+	line-height: 1.5;
+}
+
+.bizeros-admin-wrap label.description {
+	display: inline-flex;
+	align-items: flex-start;
+	gap: 7px;
+	margin-top: 8px;
+}
+
+.bizeros-admin-wrap label.description input[type="checkbox"] {
+	flex: 0 0 auto;
+	margin-top: 1px;
+}
+
+.bizeros-admin-wrap code {
+	padding: 2px 6px;
+	border-radius: 4px;
+	color: #4c1d95;
+	background: var(--bizeros-admin-primary-soft);
+}
+
+.bizeros-admin-wrap pre,
+.bizeros-admin-wrap textarea.code {
+	box-sizing: border-box;
+	max-width: 680px;
+	margin: 10px 0 0;
+	padding: 12px 14px;
+	border: 1px solid var(--bizeros-admin-border-soft);
+	border-radius: 8px;
+	color: var(--bizeros-admin-text);
+	background: #fbfaff;
+	font-family: Consolas, Monaco, monospace;
+	font-size: 12px;
+	line-height: 1.55;
+	overflow: auto;
+	white-space: pre;
+}
+
+.bizeros-admin-wrap pre code {
+	display: block;
+	padding: 0;
+	border-radius: 0;
+	color: inherit;
+	background: transparent;
+	white-space: pre;
+}
+
+.bizeros-admin-wrap .submit {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.bizeros-admin-wrap .button-primary {
+	border-color: var(--bizeros-admin-primary-dark);
+	background: var(--bizeros-admin-primary);
+	box-shadow: none;
+}
+
+.bizeros-admin-wrap .button-primary:hover,
+.bizeros-admin-wrap .button-primary:focus {
+	border-color: var(--bizeros-admin-primary-dark);
+	background: var(--bizeros-admin-primary-dark);
+}
+
+.bizeros-admin-wrap .button-primary:focus {
+	box-shadow: 0 0 0 1px #ffffff, 0 0 0 3px rgba(124, 58, 237, 0.45);
+}
+
+.bizeros-admin-wrap .notice {
+	max-width: 860px;
+	margin: 12px 0 18px;
+	border-radius: 6px;
+}
+
+/* Hermes webhook setup guidance. */
+.bizeros-admin-webhook-setup,
+.bizeros-admin-guidance,
+.bizeros-admin-setup-guidance {
+	max-width: 680px;
+	padding: 14px 16px;
+	border: 1px solid var(--bizeros-admin-border-soft);
+	border-radius: var(--bizeros-admin-radius);
+	background: var(--bizeros-admin-surface-soft);
+}
+
+.bizeros-admin-webhook-setup p:first-child,
+.bizeros-admin-guidance p:first-child,
+.bizeros-admin-setup-guidance p:first-child {
+	margin-top: 0;
+}
+
+.bizeros-admin-webhook-setup p:last-child,
+.bizeros-admin-guidance p:last-child,
+.bizeros-admin-setup-guidance p:last-child {
+	margin-bottom: 0;
+}
+
+.bizeros-admin-webhook-setup ul,
+.bizeros-admin-webhook-setup ol,
+.bizeros-admin-guidance ul,
+.bizeros-admin-guidance ol,
+.bizeros-admin-setup-guidance ul,
+.bizeros-admin-setup-guidance ol {
+	margin: 10px 0 0 20px;
+	color: var(--bizeros-admin-muted);
+	line-height: 1.55;
+}
+
+.bizeros-admin-webhook-setup li,
+.bizeros-admin-guidance li,
+.bizeros-admin-setup-guidance li {
+	margin-bottom: 6px;
+}
+
+.bizeros-admin-webhook-setup strong,
+.bizeros-admin-guidance strong,
+.bizeros-admin-setup-guidance strong {
+	color: var(--bizeros-admin-text);
+}
+
+.bizeros-admin-webhook-config,
+.bizeros-admin-config-example {
+	max-width: 680px;
+	margin-top: 12px;
+}
+
+.bizeros-admin-webhook-config__title,
+.bizeros-admin-config-example__title {
+	margin: 0 0 6px;
+	color: var(--bizeros-admin-text);
+	font-weight: 600;
+}
+
+/* Hermes connection test. */
+.bizeros-admin-connection-test,
+.bizeros-admin-test {
+	max-width: 680px;
+}
+
+.bizeros-admin-connection-test__controls {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin-top: 10px;
+}
+
+.bizeros-admin-connection-test__message {
+	margin-top: 10px;
+}
+
+.bizeros-admin-wrap input[type="text"].bizeros-admin-connection-test__message-input,
+.bizeros-admin-connection-test__message-input,
+.bizeros-admin-wrap input[type="text"][data-bizeros-test-message] {
+	width: 100%;
+	max-width: 460px;
+}
+
+.bizeros-admin-test-button,
+.bizeros-admin-test [data-bizeros-test-button],
+.bizeros-admin-wrap [data-bizeros-test-button] {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.bizeros-admin-test-button.is-loading,
+.bizeros-admin-test [data-bizeros-test-button].is-loading,
+.bizeros-admin-wrap [data-bizeros-test-button].is-loading {
+	cursor: wait;
+	opacity: 0.75;
+}
+
+.bizeros-admin-test-button[disabled],
+.bizeros-admin-test-button[aria-disabled="true"],
+.bizeros-admin-test [data-bizeros-test-button][disabled],
+.bizeros-admin-test [data-bizeros-test-button][aria-disabled="true"],
+.bizeros-admin-wrap [data-bizeros-test-button][disabled],
+.bizeros-admin-wrap [data-bizeros-test-button][aria-disabled="true"] {
+	cursor: wait;
+}
+
+.bizeros-admin-test-spinner,
+.bizeros-admin-wrap .spinner.bizeros-admin-test-spinner,
+.bizeros-admin-wrap [data-bizeros-test-spinner],
+.bizeros-admin-wrap .spinner[data-bizeros-test-spinner] {
+	float: none;
+	margin: 0 0 0 2px;
+	visibility: hidden;
+}
+
+.bizeros-admin-test-spinner.is-active,
+.bizeros-admin-wrap .spinner.bizeros-admin-test-spinner.is-active,
+.bizeros-admin-wrap [data-bizeros-test-spinner].is-active,
+.bizeros-admin-wrap .spinner[data-bizeros-test-spinner].is-active {
+	visibility: visible;
+}
+
+.bizeros-admin-test-result-wrap,
+.bizeros-admin-test__result,
+.bizeros-admin-wrap [data-bizeros-test-result] {
+	max-width: 680px;
+	margin-top: 14px;
+}
+
+.bizeros-admin-test-result-wrap[hidden],
+.bizeros-admin-test__result[hidden],
+.bizeros-admin-wrap [data-bizeros-test-result][hidden] {
+	display: none;
+}
+
+.bizeros-admin-test-result {
+	max-width: 680px;
+	margin: 0;
+	padding: 12px 14px;
+	border-radius: 8px;
+	background: #ffffff;
+}
+
+.bizeros-admin-test-result.notice-success {
+	border-left-color: var(--bizeros-admin-success);
+}
+
+.bizeros-admin-test-result.notice-error {
+	border-left-color: var(--bizeros-admin-error);
+}
+
+.bizeros-admin-test-result.notice-warning {
+	border-left-color: var(--bizeros-admin-warning);
+}
+
+.bizeros-admin-test-result__title {
+	margin: 0 0 6px;
+	color: var(--bizeros-admin-text);
+	font-weight: 600;
+}
+
+.bizeros-admin-test-result__message,
+.bizeros-admin-test-result__loading {
+	margin: 6px 0 0;
+	color: var(--bizeros-admin-text);
+	line-height: 1.5;
+}
+
+.bizeros-admin-test-result__loading {
+	color: var(--bizeros-admin-muted);
+}
+
+.bizeros-admin-test__details,
+.bizeros-admin-test details,
+.bizeros-admin-wrap details.bizeros-admin-test__details {
+	max-width: 680px;
+	margin-top: 12px;
+	padding: 10px 12px;
+	border: 1px solid var(--bizeros-admin-border-soft);
+	border-radius: 8px;
+	background: var(--bizeros-admin-surface-soft);
+}
+
+.bizeros-admin-test__details summary,
+.bizeros-admin-test details summary,
+.bizeros-admin-wrap details.bizeros-admin-test__details summary {
+	color: var(--bizeros-admin-text);
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.bizeros-admin-diagnostics,
+.bizeros-admin-wrap ul.bizeros-admin-diagnostics {
+	margin: 10px 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.bizeros-admin-diagnostics li {
+	display: grid;
+	grid-template-columns: minmax(140px, 190px) minmax(0, 1fr);
+	gap: 8px;
+	margin: 0;
+	padding: 7px 0;
+	border-top: 1px solid var(--bizeros-admin-border-soft);
+	color: var(--bizeros-admin-muted);
+	font-size: 12px;
+	line-height: 1.45;
+}
+
+.bizeros-admin-diagnostics li:first-child {
+	border-top: 0;
+}
+
+.bizeros-admin-diagnostics strong {
+	color: var(--bizeros-admin-text);
+	font-weight: 600;
+}
+
+.bizeros-admin-diagnostics code {
+	white-space: normal;
+	word-break: break-word;
+}
+
+.bizeros-admin-diagnostics-table {
+	max-width: 100%;
+	margin-top: 12px;
+	border-color: var(--bizeros-admin-border-soft);
+	table-layout: fixed;
+}
+
+.bizeros-admin-diagnostics-table th,
+.bizeros-admin-diagnostics-table td {
+	padding: 8px 10px;
+	vertical-align: top;
+	font-size: 12px;
+	line-height: 1.45;
+	word-break: break-word;
+}
+
+.bizeros-admin-diagnostics-table th {
+	width: 170px;
+	color: var(--bizeros-admin-text);
+	font-weight: 600;
+}
+
+.bizeros-admin-diagnostics-table td {
+	color: var(--bizeros-admin-muted);
+	font-family: Consolas, Monaco, monospace;
+}
+
+.bizeros-admin-diagnostics-table code {
+	white-space: normal;
+	word-break: break-all;
+}
+
+@media screen and (max-width: 782px) {
+	.bizeros-admin-wrap {
+		max-width: none;
+	}
+
+	.bizeros-admin-wrap form {
+		padding-right: 16px;
+		padding-left: 16px;
+	}
+
+	.bizeros-admin-wrap h2 {
+		margin-right: -16px;
+		margin-left: -16px;
+		padding-right: 16px;
+		padding-left: 16px;
+	}
+
+	.bizeros-admin-wrap .form-table th,
+	.bizeros-admin-wrap .form-table td {
+		display: block;
+		width: 100%;
+		padding-right: 0;
+		padding-left: 0;
+	}
+
+	.bizeros-admin-wrap .form-table th {
+		padding-bottom: 4px;
+	}
+
+	.bizeros-admin-wrap .form-table td {
+		padding-top: 4px;
+	}
+
+	.bizeros-admin-wrap input[type="text"],
+	.bizeros-admin-wrap input[type="url"],
+	.bizeros-admin-wrap input[type="password"],
+	.bizeros-admin-wrap input[readonly],
+	.bizeros-admin-wrap select {
+		max-width: 100%;
+		min-height: 40px;
+	}
+
+	.bizeros-admin-wrap select {
+		width: 100%;
+		min-width: 0;
+	}
+
+	.bizeros-admin-wrap input[type="text"].bizeros-admin-connection-test__message-input,
+	.bizeros-admin-connection-test__message-input,
+	.bizeros-admin-wrap input[type="text"][data-bizeros-test-message] {
+		max-width: 100%;
+	}
+
+	.bizeros-admin-webhook-setup,
+	.bizeros-admin-guidance,
+	.bizeros-admin-setup-guidance,
+	.bizeros-admin-wrap pre,
+	.bizeros-admin-wrap textarea.code {
+		max-width: 100%;
+	}
+
+	.bizeros-admin-diagnostics {
+		max-width: 100%;
+	}
+
+	.bizeros-admin-diagnostics li {
+		display: block;
+	}
+
+	.bizeros-admin-diagnostics li strong {
+		display: block;
+		margin-bottom: 2px;
+	}
+
+	.bizeros-admin-diagnostics-table {
+		table-layout: auto;
+	}
+
+	.bizeros-admin-diagnostics-table th,
+	.bizeros-admin-diagnostics-table td {
+		display: block;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	.bizeros-admin-diagnostics-table th {
+		padding-bottom: 2px;
+	}
+
+	.bizeros-admin-diagnostics-table td {
+		padding-top: 2px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.bizeros-admin-wrap h1 {
+		align-items: flex-start;
+		font-size: 22px;
+	}
+
+	.bizeros-admin-wrap h1::before {
+		width: 30px;
+		height: 30px;
+		font-size: 15px;
+	}
+
+	.bizeros-admin-wrap form {
+		padding-right: 12px;
+		padding-left: 12px;
+	}
+
+	.bizeros-admin-wrap h2 {
+		margin-right: -12px;
+		margin-left: -12px;
+		padding-right: 12px;
+		padding-left: 12px;
+	}
+
+	.bizeros-admin-connection-test__controls {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+
+	.bizeros-admin-test-spinner,
+	.bizeros-admin-wrap .spinner.bizeros-admin-test-spinner,
+	.bizeros-admin-wrap [data-bizeros-test-spinner],
+	.bizeros-admin-wrap .spinner[data-bizeros-test-spinner] {
+		margin-left: 0;
+	}
+
+	.bizeros-admin-webhook-setup,
+	.bizeros-admin-guidance,
+	.bizeros-admin-setup-guidance {
+		padding-right: 12px;
+		padding-left: 12px;
+	}
+}
