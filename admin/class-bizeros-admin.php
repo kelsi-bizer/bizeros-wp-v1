@@ -1196,18 +1196,47 @@ class BizerOS_Admin {
 			name="<?php echo esc_attr( BIZEROS_OPTION_HERMES_WEBHOOK_SECRET ); ?>"
 			value=""
 			class="regular-text"
-			placeholder="<?php echo $has_secret ? esc_attr__( 'Saved shared secret is hidden. Enter a new secret to replace it.', 'bizeros' ) : esc_attr__( 'Paste Hermes webhook shared secret', 'bizeros' ); ?>"
+			placeholder="<?php echo $has_secret ? esc_attr__( 'Saved shared secret is hidden. Enter a new secret to replace it.', 'bizeros' ) : esc_attr__( 'Enter the secret you also set in Hermes config.yaml', 'bizeros' ); ?>"
 			autocomplete="new-password"
 		/>
-		<p class="description">
-			<?php
-			if ( $has_secret ) {
-				echo esc_html__( 'A Hermes webhook shared secret is saved. For security it is not displayed. Leave this field blank to keep the saved secret, or enter a new one to replace it. BizerOS signs the exact JSON body with HMAC-SHA256 and sends the hex digest in X-Webhook-Signature.', 'bizeros' );
-			} else {
-				echo esc_html__( 'Required by default. Enter the same shared secret configured in Hermes config.yaml. BizerOS uses it only server-side to create HMAC-SHA256 signatures.', 'bizeros' );
-			}
-			?>
-		</p>
+		<div class="description">
+			<?php if ( $has_secret ) : ?>
+				<p>
+					<?php echo esc_html__( 'A Hermes webhook shared secret is saved. For security it is not displayed. Leave this field blank to keep the saved secret, or enter a new one to replace it.', 'bizeros' ); ?>
+				</p>
+			<?php else : ?>
+				<p>
+					<strong><?php echo esc_html__( 'This is a secret you create yourself. It is not a login code, and not a code from the AI assistant or chat — asking the assistant for a code will not work here.', 'bizeros' ); ?></strong>
+				</p>
+				<p>
+					<?php echo esc_html__( 'The same value must be configured in two places: this field and the Hermes server. BizerOS uses it only server-side to sign each request with HMAC-SHA256; it is never sent to the browser.', 'bizeros' ); ?>
+				</p>
+			<?php endif; ?>
+			<p><strong><?php echo esc_html__( 'Set it up from here:', 'bizeros' ); ?></strong></p>
+			<ol class="bizeros-admin-secret-steps">
+				<li>
+					<?php
+					printf(
+						/* translators: 1: example command in a code tag, 2: Hermes config key in a code tag. */
+						esc_html__( 'Choose one strong random string. Generate one with %1$s, or reuse the value already set in your Hermes config.yaml under %2$s.', 'bizeros' ),
+						'<code>openssl rand -hex 32</code>',
+						'<code>platforms.webhook.secret</code>'
+					);
+					?>
+				</li>
+				<li>
+					<?php
+					printf(
+						/* translators: %s: Hermes config key in a code tag. */
+						esc_html__( 'Put that exact string in your Hermes config.yaml under %s, then reload or restart Hermes so it takes effect.', 'bizeros' ),
+						'<code>platforms.webhook.secret</code>'
+					);
+					?>
+				</li>
+				<li><?php echo esc_html__( 'Paste the identical string into this field and save. It must match character for character — no extra spaces, line breaks, or smart quotes.', 'bizeros' ); ?></li>
+				<li><?php echo esc_html__( 'Use the "Test Hermes Webhook" button below to confirm the secret matches and delivery succeeds.', 'bizeros' ); ?></li>
+			</ol>
+		</div>
 		<?php if ( $has_secret ) : ?>
 			<label class="description">
 				<input type="checkbox" name="bizeros_hermes_webhook_secret_clear" value="1" />
@@ -1277,7 +1306,7 @@ class BizerOS_Admin {
 		?>
 		<div class="bizeros-admin-webhook-guidance">
 			<p class="description">
-				<?php echo esc_html__( 'Configure Hermes webhook support with values equivalent to the example below. Use the same shared secret in WordPress and Hermes.', 'bizeros' ); ?>
+				<?php echo esc_html__( 'Configure Hermes webhook support with values equivalent to the example below. Replace YOUR_SHARED_SECRET with the exact same secret you saved in the Webhook Shared Secret field above — the request is rejected unless both sides match.', 'bizeros' ); ?>
 			</p>
 			<pre class="bizeros-admin-code-block"><code><?php echo esc_html( "platforms:\n  webhook:\n    enabled: true\n    port: " . $port . "\n    route: " . $route . "\n    secret: \"YOUR_SHARED_SECRET\"\n    signature_header: \"" . $header . "\"" ); ?></code></pre>
 			<p class="description">
