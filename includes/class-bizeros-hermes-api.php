@@ -679,10 +679,10 @@ class BizerOS_Hermes_API {
 		if ( $require_secret && '' === $secret ) {
 			$this->last_delivery_success        = false;
 			$this->last_delivery_error          = __( 'Hermes webhook shared secret is not configured.', 'bizeros' );
-			$this->last_endpoint_recommendation = __( 'Enter the same webhook shared secret configured in Hermes config.yaml. BizerOS signs each JSON body with HMAC-SHA256 and sends it in X-Webhook-Signature.', 'bizeros' );
+			$this->last_endpoint_recommendation = __( 'Choose a strong random string, set it as platforms.webhook.secret in Hermes config.yaml, and save the identical value in the Webhook Shared Secret field. It is a secret you create yourself, not a code from the AI assistant.', 'bizeros' );
 
 			return $this->build_failure_response(
-				__( 'Hermes webhook shared secret is not configured. Please enter the same secret configured in Hermes.', 'bizeros' ),
+				__( 'Hermes webhook shared secret is not configured. Save the same secret here that is set in Hermes config.yaml (it is not an AI assistant code).', 'bizeros' ),
 				'bizeros_missing_hermes_webhook_secret',
 				400,
 				array(
@@ -1338,11 +1338,11 @@ class BizerOS_Hermes_API {
 
 		if ( 401 === $status_code || 403 === $status_code ) {
 			$this->last_delivery_success        = false;
-			$this->last_delivery_error          = __( 'Hermes rejected the signed webhook request. Check the shared secret and signature header configuration.', 'bizeros' );
-			$this->last_endpoint_recommendation = __( 'Confirm Hermes config.yaml uses the same shared secret and validates the X-Webhook-Signature HMAC-SHA256 value over the exact JSON body.', 'bizeros' );
+			$this->last_delivery_error          = __( 'Hermes rejected the signed webhook request. The shared secret saved here does not match the one in Hermes config.yaml. This secret is a value you set yourself in both places — it is not a code from the AI assistant or chat.', 'bizeros' );
+			$this->last_endpoint_recommendation = __( 'Set platforms.webhook.secret in Hermes config.yaml to the exact same string saved in the Webhook Shared Secret field (no extra spaces, line breaks, or smart quotes), reload Hermes, then run the test again.', 'bizeros' );
 
 			return $this->build_failure_response(
-				__( 'Hermes rejected the signed webhook request. Please check the webhook shared secret and X-Webhook-Signature configuration.', 'bizeros' ),
+				__( 'Hermes rejected the signed webhook request: the shared secret here does not match Hermes config.yaml. Set the identical secret in both places (it is not an AI assistant code), reload Hermes, and test again.', 'bizeros' ),
 				'bizeros_hermes_webhook_unauthorized',
 				$status_code,
 				array(
